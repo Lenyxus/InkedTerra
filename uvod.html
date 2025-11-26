@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INKEDTERRA Tattoo | Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Pirata+One&family=UnifrakturMaguntia&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- DEFINICE PROMĚNNÝCH (BAREV) --- */
+        :root {
+            /* Výchozí (Dark Mode) */
+            --bg-color: #050505;
+            --bg-secondary: #0a0a0a;
+            --text-main: #dcdcdc;
+            --text-muted: #888888;
+            --accent: #8a0303;
+            --border-color: #333333;
+            --btn-hover: #b30000;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            --bg-color: #f4f1ea;
+            --bg-secondary: #ebe7dd;
+            --text-main: #1a1a1a;
+            --text-muted: #4a4a4a;
+            --accent: #6636a8; 
+            --border-color: #c0b9a8;
+            --btn-hover: #6c38ab;
+        }
+
+        /* --- ZÁKLADNÍ STYLY --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        h1, h2, h3 {
+            font-family: 'UnifrakturMaguntia', cursive;
+            font-weight: 400;
+        }
+
+        /* Třída pro vložení Pirata One fontu dovnitř textu */
+        .text-highlight {
+            font-family: 'Pirata One', cursive;
+            font-weight: 400;
+            /* color: var(--accent);  <- Pokud bys to chtěla i barevné, odkomentuj */
+        }
+
+        .subtitle {
+            font-family: 'Cinzel Decorative', cursive;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* --- NAVIGACE --- */
+        nav {
+            display: flex;
+            justify-content: space-between; /* Toto je základ, ale margin-left to přebije */
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            
+            /* POSUN DOPRAVA */
+            margin-left: auto;  
+            margin-right: 30px; 
+        }
+
+        .nav-links a {
+            color: var(--text-main); text-decoration: none;
+            font-family: 'Cinzel Decorative', cursive; font-weight: 700; font-size: 0.9rem;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 1px;
+            bottom: -5px; left: 0; background-color: var(--accent); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .theme-toggle {
+            background: none; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 8px 15px; cursor: pointer; font-family: 'Cinzel Decorative', cursive; border-radius: 2px;
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* --- OBECNÉ STYLY SEKCÍ --- */
+        section {
+            padding: 100px 20px;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '--- ✠ ---';
+            display: block;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-top: 10px;
+            font-family: 'Cinzel Decorative', cursive;
+        }
+
+        /* --- SEKCE 1: ÚVOD (HERO) --- */
+        #intro {
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 90%);
+        }
+
+        #intro::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1598371839696-5c5bb62d8326?q=80&w=2574&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            opacity: 0.15; z-index: -1; filter: grayscale(100%);
+             transition: opacity 0.5s ease;
+        }
+        body.light-mode #intro::before { opacity: 0.08; }
+
+        #intro h1 { font-size: 5rem; margin-bottom: 10px; line-height: 1.1; }
+        #intro p { font-size: 1.2rem; max-width: 600px; margin: 20px auto 40px; color: var(--text-muted); }
+
+        .cta-button {
+            display: inline-block; padding: 15px 40px; background-color: transparent;
+            color: var(--accent); border: 2px solid var(--accent);
+            font-family: 'Cinzel Decorative', cursive; font-weight: 700;
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        .cta-button:hover { background-color: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent); }
+
+
+        /* --- SEKCE 2: GALERIE --- */
+        #gallery {
+            background-color: var(--bg-secondary);
+            transition: background-color 0.5s ease;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .gallery-item {
+            height: 450px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            
+            /* Animace */
+            opacity: 0;
+            transform: translateY(100px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .gallery-item.show { opacity: 1; transform: translateY(0) scale(1); }
+        .gallery-item:nth-child(2) { transition-delay: 0.2s; }
+        .gallery-item:nth-child(3) { transition-delay: 0.4s; }
+
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.5s ease, transform 0.5s ease;
+        }
+        .gallery-item:hover img { filter: grayscale(0%) contrast(100%); transform: scale(1.05); }
+
+        .gallery-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
+            background: linear-gradient(to top, var(--bg-color), transparent);
+            color: var(--text-main); font-family: 'Cinzel Decorative', cursive;
+            transform: translateY(100%); transition: transform 0.3s ease;
+        }
+        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+
+        /* --- PATIČKA --- */
+        footer {
+            text-align: center; padding: 40px; border-top: 1px solid var(--border-color);
+            font-size: 0.8rem; color: var(--text-muted);
+            background-color: var(--bg-color);
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            #intro h1 { font-size: 3rem; }
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .section-title { font-size: 2.2rem; }
+            .gallery-item { height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">INKEDTERRA <span>TATTOO</span></a>
+        <ul class="nav-links">
+            <li><a href="#gallery">Galerie</a></li>
+            <li><a href="#artists">Umělci</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+        </ul>
+        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Přepnout režim">
+            ☾ / ☀
+        </button>
+    </nav>
+
+    <main>
+        
+        <section id="intro">
+            <span class="subtitle">Est. 2025 • Karlovy Vary</span>
+            <h1>Umění <span class="text-highlight">vry</span>té<br>do duše</h1>
+            <p>Specializuji se na blackwork, gothic lettering a realismus. <br>Váš příběh, můj inkoust.</p>
+            <a href="#gallery" class="cta-button">Prohlédnout práce</a>
+        </section>
+
+        <section id="gallery">
+            <h2 class="section-title">Moje Práce</h2>
+            
+            <div class="gallery-grid">
+                
+                <div class="gallery-item hidden">
+                    <img src="tattoo1.png" alt="Tattoo práce 1">
+                    <div class="gallery-overlay">Blackwork Hvězda</div>
+                </div>
+
+                <div class="gallery-item hidden">
+                     <img src="tatto2.png" alt="Tattoo práce 2">
+                    <div class="gallery-overlay">Gotická Sýkorka</div>
+                </div>
+
+                <div class="gallery-item hidden">
+                     <img src="tattoo3.png" alt="Tattoo práce 3">
+                    <div class="gallery-overlay">Temný Realismus</div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 INKEDTERRA Tattoo Studio.</p>
+        <p style="margin-top:10px; font-family:'Pirata One', cursive; font-size: 1.5rem; color: var(--accent);">Memento Mori</p>
+    </footer>
+
+    <script>
+        // --- 1. LOGIKA PRO DARK/LIGHT MODE ---
+        const toggleBtn = document.getElementById('theme-toggle-btn');
+        const body = document.body;
+        const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)');
+
+        function setMode(isLight) {
+            if (isLight) { body.classList.add('light-mode'); } else { body.classList.remove('light-mode'); }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') { setMode(true); } 
+        else if (savedTheme === 'dark') { setMode(false); } 
+        else { setMode(systemPrefersLight.matches); }
+
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+        
+        systemPrefersLight.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { setMode(e.matches); }
+        });
+
+
+        // --- 2. LOGIKA PRO SCROLL ANIMACI ---
+        const hiddenElements = document.querySelectorAll('.hidden');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } 
+            });
+        }, { threshold: 0.2 });
+
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+
+</body>
+</html>
