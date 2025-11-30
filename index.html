@@ -3,47 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INKEDTERRA Tattoo | Portfolio</title>
+    <title>INKEDTERRA | Home</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Grenze+Gotisch:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel+Decorative:wght@400;700;900&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- DEFINICE PROMĚNNÝCH (BAREV) --- */
+        /* --- DEFINICE BAREV A PROMĚNNÝCH --- */
         :root {
-            /* === DARK MODE (Výchozí) === */
+            /* === DARK MODE === */
             --bg-color: #050505;
-            --bg-secondary: #0a0a0a;
-            --text-main: #dcdcdc;
-            --text-muted: #888888;
-            --accent: #8a0303;
-            --border-color: #333333;
-            --btn-hover: #b30000;
+            --text-main: #e6e6e6;
+            --text-muted: #888;
+            --accent: #8a0303; 
+            --accent-glow: rgba(138, 3, 3, 0.6);
+            --nav-bg: rgba(15, 15, 15, 0.85);
+            --border-color: rgba(255, 255, 255, 0.1);
             
-            /* Pozadí pro Dark Mode + Gradient */
-            --bg-intro-img: url('HERO-BG.png');
-            --hero-gradient: linear-gradient(to right, rgba(0,0,0, 0.9), rgba(0,0,0, 0.4));
+            --bg-intro-img: url('img/HERO-BG.png');
+            --hero-gradient: linear-gradient(to bottom, rgba(0,0,0, 0.2), rgba(0,0,0, 0.95));
+            
+            /* Tmavé pozadí kontaktu (Radiální stín) */
+            --bg-contact: radial-gradient(circle at center, #111 0%, #000 100%);
+            --bg-gallery-home: #080808;
         }
 
         /* === LIGHT MODE === */
         body.light-mode {
-            --bg-color: #f4f1ea;
-            --bg-secondary: #ebe7dd;
-            --text-main: #1a1a1a;
-            --text-muted: #4a4a4a;
-            --accent: #6636a8; 
-            --border-color: #c0b9a8;
-            --btn-hover: #6c38ab;
+            --bg-color: #eaddcf; 
+            --text-main: #0a0a0a;
+            --text-muted: #444;
+            --accent: #6a0dad;
+            --accent-glow: rgba(106, 13, 173, 0.5);
+            --nav-bg: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(106, 13, 173, 0.3);
             
-            /* Pozadí pro Light Mode + ŽÁDNÝ Gradient (transparentní) */
-            --bg-intro-img: url('HERO-LIGHT-BG.png');
-            --hero-gradient: linear-gradient(rgba(255,255,255, 0), rgba(255,255,255, 0)); 
+            --bg-intro-img: url('img/HERO-LIGHT-BG.png');
+            --hero-gradient: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.15) 100%), linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.2)); 
+            
+            /* NOVÉ POZADÍ KONTAKTU (Textura pergamenu) */
+            --bg-contact: url('https://www.transparenttextures.com/patterns/aged-paper.png'), linear-gradient(to bottom, #dcd0c0, #eaddcf);
+            --bg-gallery-home: #e6ded3;
         }
 
-        /* --- ZÁKLADNÍ STYLY --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -51,402 +55,254 @@
             color: var(--text-main);
             font-family: 'Lato', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            transition: background 0.5s, color 0.5s;
         }
 
-        h1, h2, h3 {
-            /* NOVÝ FONT, KTERÝ UMÍ ČESKY: */
-            font-family: 'Cinzel Decorative', cursive;
-            font-weight: 400;
-            letter-spacing: 1px; /* U tohoto fontu vypadá malý rozestup dobře */
-            font-size: 110%;     /* Tento font je opticky trochu menší, tak ho zvětšíme */
+        /* TEXTURA (Noise) */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9999; opacity: 0.4;
         }
 
-        /* Pokud používáte i .text-highlight (to vryté), změňte to taky: */
-        .text-highlight {
-            font-family: 'Cinzel Decorative', cursive;
-            /* (Pirata One taky neumí ě/š, takže raději použijte tento všude) */
-        }
-
-        /* Pro tlačítka a navigační menu */
-        .nav-links a, .cta-button, .subtitle {
-            font-family: 'Cinzel Decorative', cursive;
-            font-weight: 700;
-        }
-
-        /* Pro běžný text (odstavce) */
-        body, p {
-            font-family: 'Lato', sans-serif;
-        }
-
-        /* Třída pro vložení Pirata One fontu dovnitř textu */
-        .text-highlight {
-            font-family: 'Pirata One', cursive;
-            font-weight: 400;
-        }
-
-        .subtitle {
-            font-family: 'Cinzel Decorative', cursive;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        /* --- NAVIGACE --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            border-bottom: 1px solid var(--border-color);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background-color: var(--bg-color);
-            z-index: 1000;
-            transition: background-color 0.5s ease, border-color 0.5s ease;
-        }
-
-        .nav-logo-text {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: 1px;
-            font-family: 'UnifrakturMaguntia', cursive;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-            margin-left: auto;  
-            margin-right: 30px; 
-        }
-
-        .nav-links a {
-            color: var(--text-main); text-decoration: none;
-            font-family: 'Cinzel Decorative', cursive; font-weight: 700; font-size: 0.9rem;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 1px;
-            bottom: -5px; left: 0; background-color: var(--accent); transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-
-        .theme-toggle {
-            background: none; border: 1px solid var(--border-color); color: var(--text-main);
-            padding: 8px 15px; cursor: pointer; font-family: 'Cinzel Decorative', cursive; border-radius: 2px;
-        }
-        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-
-        /* --- OBECNÉ STYLY SEKCÍ --- */
-        section {
-            padding: 100px 20px;
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+        /* TYPOGRAFIE */
+        h1, h2, h3 { font-family: 'Cinzel Decorative', cursive; font-weight: 700; }
 
         .section-title {
-            font-size: 3rem;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '--- ✠ ---';
-            display: block;
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-top: 10px;
-            font-family: 'Cinzel Decorative', cursive;
-        }
-
-        /* --- SEKCE 1: ÚVOD (HERO) - UPRAVENO --- */
-        #intro {
-            height: 100vh;
-            position: relative;
-            
-            /* DYNAMICKÉ POZADÍ */
-            /* Zde se aplikuje gradient (jen v dark mode) a obrázek */
-            background: var(--hero-gradient), var(--bg-intro-img);
-            
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: background-image 0.5s ease;
-
-            /* FLEXBOX PRO ROZLOŽENÍ (Logo vlevo, Text vpravo) */
-            display: flex;
-            flex-direction: row; /* Vedle sebe */
-            justify-content: space-between; /* Roztáhnout do stran */
-            align-items: center;
-            padding: 0 10%; /* Odsazení z boků */
-        }
-
-        /* Kontejner pro logo vlevo */
-        .intro-logo-container {
-            flex: 1; /* Zabere místo vlevo */
-            display: flex;
-            justify-content: center; /* Vycentrování loga v jeho sloupci */
-        }
-
-        .intro-logo-img {
-            max-width: 550px; /* Maximální šířka loga */
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* Stín pod logem */
-            margin-top: 50px;
-        }
-
-        /* Kontejner pro text vpravo */
-        .intro-content {
-            flex: 1; /* Zabere místo vpravo */
-            text-align: right; /* Zarovnání textu doprava */
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end; /* Tlačítko taky doprava */
-            z-index: 2;
-        }
-
-        /* 1. Hlavní nadpis */
-        #intro h1 { 
-            font-size: 4.5rem; 
-            margin-bottom: 5px; 
-            line-height: 1; 
+            font-size: 3rem; text-align: center; margin-bottom: 60px;
+            text-shadow: 0 0 15px var(--accent-glow);
             text-transform: uppercase;
         }
+
+        /* --- HEADER --- */
+        nav {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px; padding: 15px 40px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: all 0.3s ease;
+        }
+
+        /* LOGO - SJEDNOCENÝ FONT (UnifrakturMaguntia - Old English style) */
+        .nav-logo-text { 
+            font-family: 'UnifrakturMaguntia', cursive; 
+            font-size: 2rem; 
+            color: var(--text-main); 
+            text-decoration: none; 
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5); 
+        }
+
+        .nav-links { list-style: none; display: flex; gap: 40px; }
+        .nav-links a {
+            color: var(--text-main); text-decoration: none;
+            font-family: 'Cinzel Decorative', cursive; 
+            font-weight: 700; font-size: 1.1rem;
+            text-transform: uppercase; letter-spacing: 1px; position: relative;
+        }
+        .nav-links a:hover { color: var(--accent); }
         
-        /* 2. Jméno (Podnadpis) */
-        #intro h2 {
-            font-size: 2.5rem;
-            color: var(--accent);
-            font-family: 'Cinzel Decorative', cursive;
-            margin-bottom: 20px;
-            font-weight: 700;
+        .theme-toggle {
+            background: none; border: 1px solid var(--text-main); color: var(--text-main);
+            width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
         }
 
-        /* 3. About me text */
-        #intro p { 
-            font-size: 1.1rem; 
-            max-width: 500px; /* Aby text nebyl moc široký */
-            margin-bottom: 40px; 
-            color: var(--text-main);
-            opacity: 0.9;
+        /* --- HERO SEKCE --- */
+        #intro {
+            min-height: 100vh;
+            background: var(--hero-gradient), var(--bg-intro-img);
+            background-size: cover; background-position: center; background-attachment: fixed;
+            display: flex; align-items: center; justify-content: center; 
+            gap: 60px; padding: 0 5%; padding-top: 80px;
         }
+        .intro-logo-container { flex: 1; display: flex; justify-content: flex-end; animation: levitate 6s ease-in-out infinite; }
+        .intro-logo-img { max-width: 420px; width: 100%; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.4)); }
+        @keyframes levitate { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .intro-content { flex: 1.2; text-align: left; animation: fadeUp 1.5s ease-out forwards; opacity: 0; transform: translateY(30px); }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .intro-subtitle { font-family: 'Cinzel Decorative', cursive; color: var(--accent); font-weight: 700; letter-spacing: 3px; font-size: 1rem; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        #intro h1 { font-size: 4rem; line-height: 1; margin-bottom: 15px; text-transform: uppercase; font-weight: 400; }
+        #intro h2 { font-family: 'Cinzel Decorative', cursive; font-size: 3.8rem; font-weight: 900; color: var(--accent); margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        #intro p { font-size: 1.1rem; line-height: 1.7; color: var(--text-main); margin-bottom: 40px; max-width: 550px; border-left: 3px solid var(--accent); padding-left: 20px; }
+        .btn-gothic { display: inline-block; padding: 15px 50px; border: 2px solid var(--accent); color: var(--accent); font-family: 'Cinzel Decorative', cursive; font-weight: 700; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-gothic:hover { background: var(--accent); color: #fff; box-shadow: 0 0 25px var(--accent-glow); }
 
-        .cta-button {
-            display: inline-block; padding: 15px 40px; background-color: transparent;
-            color: var(--accent); border: 2px solid var(--accent);
-            font-family: 'Cinzel Decorative', cursive; font-weight: 700;
-            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
-            transition: all 0.3s;
+        /* --- KONTAKT (Upraveno) --- */
+        #contact { 
+            background: var(--bg-contact);
+            padding: 100px 20px; 
+            border-top: 1px solid var(--border-color); 
         }
-        .cta-button:hover { background-color: var(--accent); color: #fff; box-shadow: 0 0 20px var(--accent); }
-
-
-        /* --- SEKCE 2: GALERIE --- */
-        #gallery {
-            background-color: var(--bg-secondary);
-            transition: background-color 0.5s ease;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .gallery-item {
-            height: 450px;
+        .contact-container { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 50px; }
+        .contact-info ul { list-style: none; font-size: 1.2rem; font-family: 'Cinzel Decorative'; }
+        .contact-info li { margin-bottom: 15px; }
+        .accent-text { color: var(--accent); font-weight: bold; }
+        
+        /* NOVÝ DESIGN PROFILOVKY - GOTICKÉ OKNO */
+        .profile-frame {
+            width: 300px; 
+            height: 400px;
+            /* Tvar gotického lomeného oblouku */
+            clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0% 100%, 0% 25%);
+            background: var(--accent);
+            padding: 4px; /* Rámeček */
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .profile-img-inner {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0% 100%, 0% 25%);
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(100px) scale(0.95);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .gallery-item.show { opacity: 1; transform: translateY(0) scale(1); }
-        .gallery-item:nth-child(2) { transition-delay: 0.2s; }
-        .gallery-item:nth-child(3) { transition-delay: 0.4s; }
-
-        .gallery-item img {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: grayscale(100%) contrast(120%);
-            transition: filter 0.5s ease, transform 0.5s ease;
+        .profile-img-inner img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            filter: grayscale(20%); 
+            transition: 0.5s;
         }
-        .gallery-item:hover img { filter: grayscale(0%) contrast(100%); transform: scale(1.05); }
+        .profile-frame:hover img { filter: grayscale(0%); transform: scale(1.05); }
 
-        .gallery-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
-            background: linear-gradient(to top, var(--bg-color), transparent);
-            color: var(--text-main); font-family: 'Cinzel Decorative', cursive;
-            transform: translateY(100%); transition: transform 0.3s ease;
+        /* --- CAROUSEL GALERIE --- */
+        #gallery { 
+            background: var(--bg-gallery-home);
+            padding: 100px 0; 
+            border-top: 1px solid var(--border-color);
         }
-        .gallery-item:hover .gallery-overlay { transform: translateY(0); }
+        
+        .gallery-wrapper { position: relative; max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        .scroll-btn { background: none; border: none; color: var(--text-main); font-family: 'Cinzel Decorative'; font-size: 4rem; cursor: pointer; padding: 0 20px; z-index: 10; transition: 0.3s; }
+        .scroll-btn:hover { color: var(--accent); transform: scale(1.2); }
+        
+        .gallery-scroll-container { display: flex; gap: 30px; overflow-x: auto; padding: 50px 20px; width: 100%; scrollbar-width: none; scroll-behavior: smooth; }
+        .gallery-scroll-container::-webkit-scrollbar { display: none; }
 
-        /* --- PATIČKA --- */
-        footer {
-            text-align: center; padding: 40px; border-top: 1px solid var(--border-color);
-            font-size: 0.8rem; color: var(--text-muted);
-            background-color: var(--bg-color);
-            transition: background-color 0.5s ease, border-color 0.5s ease;
-        }
-
-        /* --- RESPONSIVITA (Mobil) --- */
+        .gallery-card { min-width: 300px; height: 450px; flex-shrink: 0; position: relative; border: 1px solid var(--border-color); background: #050505; overflow: hidden; filter: grayscale(100%); transition: all 0.4s ease-in-out; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .gallery-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .gallery-card:hover { filter: grayscale(0%); border-color: var(--accent); box-shadow: 0 10px 30px var(--accent-glow); transform: translateY(-10px); }
+        .gallery-card:hover img { transform: scale(1.1); }
+        
+        /* RESPONSIVITA */
         @media (max-width: 900px) {
-            #intro {
-                flex-direction: column-reverse; /* Na mobilu text nahoře, logo dole nebo naopak */
-                justify-content: center;
-                text-align: center;
-                padding-top: 100px;
-            }
-            .intro-content {
-                align-items: center; /* Na mobilu vycentrovat */
-                text-align: center;
-                margin-bottom: 30px;
-            }
-            .intro-logo-img { max-width: 200px; margin-bottom: 20px; }
-            #intro h1 { font-size: 3rem; }
-            #intro h2 { font-size: 1.8rem; }
-            
+            #intro { flex-direction: column-reverse; justify-content: center; text-align: center; padding-top: 150px; gap: 30px; }
+            .intro-logo-container { justify-content: center; }
+            .intro-content { text-align: center; }
+            #intro h2 { font-size: 2.5rem; }
+            #intro p { border-left: none; padding-left: 0; margin: 0 auto 30px auto; }
+            nav { top: 0; width: 100%; left: 0; transform: none; border-radius: 0; border: none; border-bottom: 1px solid var(--border-color); }
             .nav-links { display: none; }
+            .scroll-btn { display: none; }
+            .gallery-scroll-container { scroll-snap-type: x mandatory; padding: 20px 40px; }
+            .gallery-card { scroll-snap-align: center; min-width: 85%; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="nav-logo-text"><h1>INKEDTERRA</h1></a>
-        
+        <a href="index.html" class="nav-logo-text">INKEDTERRA</a>
         <ul class="nav-links">
-            <li><a href="#gallery">Galerie</a></li>
-            <li><a href="#artists">Umělci</a></li>
+            <li><a href="#intro" style="color:var(--accent);">Domů</a></li>
+            <li><a href="cenik.html">Ceník</a></li>
             <li><a href="#contact">Kontakt</a></li>
+            <li><a href="galerie.html">Galerie</a></li>
         </ul>
-        <button class="theme-toggle" id="theme-toggle-btn" aria-label="Přepnout režim">
-            ☾ / ☀
-        </button>
+        <button class="theme-toggle" id="theme-toggle-btn">☾</button>
     </nav>
 
     <main>
         
         <section id="intro">
-            
             <div class="intro-logo-container">
-                <img src="logo-dark.png" alt="InkedTerra Logo" class="intro-logo-img" id="hero-logo">
+                <img src="img/logo-dark.png" alt="InkedTerra Logo" class="intro-logo-img" id="hero-logo">
             </div>
-
             <div class="intro-content">
-                <span class="subtitle">Est. 2025 • Karlovy Vary</span>
-                
-                <h1>Umění vryté<br>do duše</h>
-                
-                <h2>TEREZA NAWROCKÁ</h2>
-                
-                <p>Specializuji se na blackwork, gothic lettering a realismus. <br>Váš příběh, můj inkoust.</p>
-                
-                <a href="#gallery" class="cta-button">Prohlédnout práce</a>
+                <span class="intro-subtitle">Est. 2025 • Karlovy Vary</span>
+                <h1>Umění vryté<br>do duše</h1>
+                <h2>Tereza Nawrocká</h2>
+                <p>Specializuji se na blackwork, gothic lettering a temný realismus. Váš příběh, můj inkoust.</p>
+                <a href="galerie.html" class="btn-gothic">Prohlédnout Práce</a>
             </div>
+        </section>
 
+        <section id="contact">
+            <h2 class="section-title">Kontakt</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <ul>
+                        <li><span class="accent-text">†</span> Booking: DM / Email</li>
+                        <li><span class="accent-text">†</span> IG: @inkedterra_tattoo</li>
+                        <li><span class="accent-text">†</span> Adresa: Chebská 410/43</li>
+                    </ul>
+                    <div style="margin-top:20px; padding:15px; border:1px dashed var(--border-color); display:inline-block; background: rgba(0,0,0,0.3);">
+                        <span style="font-size:0.9rem; color:var(--text-muted);">Studio: INK Social Barbershop</span>
+                        <br>
+                        <img src="img/studio.jpg" style="width:200px; margin-top:10px; opacity:0.7;" alt="Studio">
+                    </div>
+                </div>
+                
+                <div class="profile-frame">
+                    <div class="profile-img-inner">
+                        <img src="img/portfolio.jpg" alt="Tereza">
+                    </div>
+                </div>
+
+            </div>
         </section>
 
         <section id="gallery">
             <h2 class="section-title">Moje Práce</h2>
             
-            <div class="gallery-grid">
-                
-                <div class="gallery-item hidden">
-                    <img src="tattoo1.png" alt="Tattoo práce 1">
-                    <div class="gallery-overlay">Blackwork Hvězda</div>
+            <div class="gallery-wrapper">
+                <button class="scroll-btn" id="btn-left">‹</button>
+                <div class="gallery-scroll-container" id="gallery-scroll">
+                    <div class="gallery-card"><img src="img/tattoo1.png" alt="Tattoo 1"></div>
+                    <div class="gallery-card"><img src="img/tatto2.png" alt="Tattoo 2"></div>
+                    <div class="gallery-card"><img src="img/tattoo3.png" alt="Tattoo 3"></div>
+                    <div class="gallery-card"><img src="img/tattoo1.png" alt="Tattoo 4"></div>
+                    <div class="gallery-card"><img src="img/tatto2.png" alt="Tattoo 5"></div>
+                    <div class="gallery-card"><img src="img/tattoo3.png" alt="Tattoo 6"></div>
                 </div>
-
-                <div class="gallery-item hidden">
-                     <img src="tatto2.png" alt="Tattoo práce 2">
-                    <div class="gallery-overlay">Gotická Sýkorka</div>
-                </div>
-
-                <div class="gallery-item hidden">
-                     <img src="tattoo3.png" alt="Tattoo práce 3">
-                    <div class="gallery-overlay">Temný Realismus</div>
-                </div>
-
+                <button class="scroll-btn" id="btn-right">›</button>
+            </div>
+            
+            <div style="text-align:center; margin-top:30px;">
+                <a href="galerie.html" style="color:var(--text-muted); text-decoration:none; font-family:'Cinzel Decorative'; border-bottom:1px solid var(--accent);">Zobrazit celé portfolio</a>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <p>&copy; 2025 INKEDTERRA Tattoo Studio.</p>
-        <p style="margin-top:10px; font-family:'Pirata One', cursive; font-size: 1.5rem; color: var(--accent);">Memento Mori</p>
-    </footer>
-
     <script>
-        // --- 1. LOGIKA PRO DARK/LIGHT MODE + LOGO SWAP ---
         const toggleBtn = document.getElementById('theme-toggle-btn');
         const body = document.body;
-        const logoImg = document.getElementById('hero-logo'); // Odkaz na logo v Hero sekci
-        const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)');
+        const logoImg = document.getElementById('hero-logo');
 
-        function setMode(isLight) {
-            if (isLight) { 
-                body.classList.add('light-mode');
-                // Změna loga pro světlý režim
-                logoImg.src = 'logo-light.png'; 
-            } else { 
-                body.classList.remove('light-mode');
-                // Změna loga pro tmavý režim
-                logoImg.src = 'logo-dark.png';
-            }
+        if(localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            toggleBtn.textContent = '☀';
+            logoImg.src = 'img/logo-light.png';
         }
 
-        // Načtení uloženého tématu
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') { setMode(true); } 
-        else if (savedTheme === 'dark') { setMode(false); } 
-        else { setMode(systemPrefersLight.matches); }
-
-        // Kliknutí na tlačítko
         toggleBtn.addEventListener('click', () => {
-            const isLightNow = body.classList.toggle('light-mode');
-            
-            // Okamžitá změna loga při kliknutí
-            if (isLightNow) {
-                logoImg.src = 'logo-light.png';
-                localStorage.setItem('theme', 'light');
-            } else {
-                logoImg.src = 'logo-dark.png';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-        
-        systemPrefersLight.addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) { setMode(e.matches); }
+            const isLight = body.classList.toggle('light-mode');
+            toggleBtn.textContent = isLight ? '☀' : '☾';
+            logoImg.src = isLight ? 'img/logo-light.png' : 'img/logo-dark.png';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
 
-
-        // --- 2. LOGIKA PRO SCROLL ANIMACI ---
-        const hiddenElements = document.querySelectorAll('.hidden');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                } 
-            });
-        }, { threshold: 0.2 });
-
-        hiddenElements.forEach((el) => observer.observe(el));
+        const scrollContainer = document.getElementById('gallery-scroll');
+        document.getElementById('btn-left').addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: -330, behavior: 'smooth' });
+        });
+        document.getElementById('btn-right').addEventListener('click', () => {
+            scrollContainer.scrollBy({ left: 330, behavior: 'smooth' });
+        });
     </script>
-
 </body>
 </html>
