@@ -853,7 +853,7 @@ body.light-mode .gothic-contact-card:hover iframe {
         margin: 0 auto 30px auto;
     }
 
-    /* --- 2. NAVIGACE (Jako na PC, ale zmenšená) --- */
+    /* --- 2. NAVIGACE --- */
     nav {
         top: 20px;
         width: 95%;
@@ -869,12 +869,12 @@ body.light-mode .gothic-contact-card:hover iframe {
     }
 
     .nav-logo-text { 
-        display: block; 
-        font-size: 1.2rem;
+        display: none !important;
     }
     
-    .theme-toggle { 
-        display: none; 
+    .theme-toggle,
+    #theme-toggle-btn { 
+        display: none !important;
     }
 
     .nav-links {
