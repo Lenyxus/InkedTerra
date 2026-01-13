@@ -863,7 +863,7 @@ body.light-mode .gothic-contact-card:hover iframe {
         border: 1px solid var(--border-color);
         
         display: flex;
-        justify-content: space-between; 
+        justify-content: center; 
         align-items: center;
         padding: 10px 20px;
     }
