@@ -866,21 +866,30 @@ body.light-mode .gothic-contact-card:hover iframe {
         justify-content: center; 
         align-items: center;
         padding: 10px 20px;
+        background: var(--nav-bg);
+        position: fixed;
     }
 
     .nav-logo-text { 
-        display: none !important;
+        display: none !important; 
     }
     
     .theme-toggle,
     #theme-toggle-btn { 
-        display: none !important;
+        display: flex !important; 
+        
+        position: absolute; 
+        right: 15px;
+        
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
     }
 
     .nav-links {
         list-style: none;
         display: flex;
-        gap: 15px;
+        gap: 20px;
         margin: 0;
         padding: 0;
         width: auto;
