@@ -1,26 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 1. PŘEPÍNÁNÍ TÉMAT (Dark/Light Mode) ---
-    const toggleBtn = document.getElementById('theme-toggle-btn');
+    const toggleBtns = document.querySelectorAll('.theme-toggle');
     const body = document.body;
     const logoImg = document.getElementById('hero-logo');
 
-    // Načtení uloženého tématu
     if(localStorage.getItem('theme') === 'light') {
         body.classList.add('light-mode');
-        if(toggleBtn) toggleBtn.textContent = '☀';
         if(logoImg) logoImg.src = 'img/logo-light.png';
+        toggleBtns.forEach(btn => btn.textContent = '☀');
     }
 
-    if(toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
             const isLight = body.classList.toggle('light-mode');
-            toggleBtn.textContent = isLight ? '☀' : '☾';
-            // Změna loga podle režimu
+            
+            toggleBtns.forEach(b => b.textContent = isLight ? '☀' : '☾');
+            
             if(logoImg) logoImg.src = isLight ? 'img/logo-light.png' : 'img/logo-dark.png';
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
-    }
+    });
 
     // --- 2. CAROUSEL GALERIE (Posouvání šipkami) ---
     const scrollContainer = document.getElementById('gallery-scroll');
