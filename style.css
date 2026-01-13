@@ -42,22 +42,23 @@ body.light-mode {
 
 /* --- INTRO - responsivita/telefon --- */
 @media (max-width: 900px) {
+    /* --- 1. HERO SEKCE (Scroll efekt) --- */
     #intro {
         flex-direction: column-reverse;
         justify-content: center;
         text-align: center;
-        padding-top: 150px;
+        padding-top: 0; 
         gap: 30px;
         margin-top: 0;
-        height: auto; 
-        min-height: auto;
+        min-height: auto; 
     }
 
     .intro-top-row {
+        /* DŮLEŽITÉ: Roztáhne text přes celou obrazovku, odkazy jsou schované pod ním */
         min-height: 100vh; 
         
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column-reverse; /* Logo nahoru, text dolů */
         justify-content: center;
         
         margin-right: 0;
@@ -67,10 +68,12 @@ body.light-mode {
 
     .intro-logo-container {
         justify-content: center;
+        min-width: auto;
     }
 
     .intro-content {
         text-align: center;
+        min-width: auto;
     }
 
     #intro h2 {
@@ -83,6 +86,7 @@ body.light-mode {
         margin: 0 auto 30px auto;
     }
 
+    /* --- 2. NAVIGACE (Jen 3 odkazy uprostřed) --- */
     nav {
         top: 0;
         width: 100%;
@@ -91,16 +95,29 @@ body.light-mode {
         border-radius: 0;
         border: none;
         border-bottom: 1px solid var(--border-color);
+        
+        /* Centrování */
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        padding: 15px 0;
     }
+
+    /* Skrytí loga a tlačítka na mobilu */
+    .nav-logo-text { display: none; }
+    .theme-toggle { display: none; }
 
     .nav-links {
         list-style: none;
         display: flex;
-        gap: 40px;
-        margin-left: auto;
-        margin-right: 20px;
+        gap: 25px;       /* Mezera mezi odkazy */
+        margin: 0;       /* Žádné odsazení */
+        padding: 0;
+        width: auto;
+        justify-content: center;
     }
 
+    /* --- 3. OSTATNÍ --- */
     .scroll-btn {
         display: none;
     }
@@ -115,9 +132,8 @@ body.light-mode {
         min-width: 85%;
     }
     
-    .hover-reveal-img { 
-        display: none !important; 
-    }
+    /* Skrytí létajících obrázků v menu */
+    .hover-reveal-img { display: none !important; }
 }
 
 @media (max-width: 768px) {
@@ -540,27 +556,6 @@ nav {
 
 @keyframes fadeUp {
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* RESPONSIVITA HERO SEKCE */
-@media (max-width: 900px) {
-    .intro-top-row {
-        flex-direction: column-reverse; /* Logo nahoru, text dolů */
-        text-align: center;
-        gap: 30px;
-    }
-    
-    .intro-logo-container { justify-content: center; }
-    .intro-content { text-align: center; }
-    
-    #intro p {
-        margin: 0 auto 30px auto;
-        border-left: none;
-        padding-left: 0;
-    }
-
-    /* Na mobilu schováme létající obrázky */
-    .hover-reveal-img { display: none !important; }
 }
 
 /* --- KONTAKT --- */
