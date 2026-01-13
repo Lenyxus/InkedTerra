@@ -40,7 +40,7 @@ body.light-mode {
     --main-shadow-rocnik: none;
 }
 
-/* --- INTRO --- */
+/* --- INTRO - responsivita/telefon --- */
 @media (max-width: 900px) {
     #intro {
         flex-direction: column-reverse;
@@ -49,6 +49,20 @@ body.light-mode {
         padding-top: 150px;
         gap: 30px;
         margin-top: 0;
+        height: auto; 
+        min-height: auto;
+    }
+
+    .intro-top-row {
+        min-height: 100vh; 
+        
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        
+        margin-right: 0;
+        margin-bottom: 0;
+        padding-top: 0;
     }
 
     .intro-logo-container {
@@ -77,14 +91,12 @@ body.light-mode {
         border-radius: 0;
         border: none;
         border-bottom: 1px solid var(--border-color);
-        
     }
 
     .nav-links {
         list-style: none;
         display: flex;
         gap: 40px;
-
         margin-left: auto;
         margin-right: 20px;
     }
@@ -101,6 +113,10 @@ body.light-mode {
     .gallery-card {
         scroll-snap-align: center;
         min-width: 85%;
+    }
+    
+    .hover-reveal-img { 
+        display: none !important; 
     }
 }
 
@@ -185,7 +201,7 @@ body.light-mode .grid-item.spark {
 #intro h1 {
     font-size: 5rem; 
     
-    line-height: 1; /* Toto určuje mezeru mezi řádky. U velkého textu dej 1 nebo 0.9, ať nejsou daleko od sebe. */
+    line-height: 1;
     margin-bottom: 15px;
     text-transform: uppercase;
     font-weight: 550;
@@ -193,21 +209,16 @@ body.light-mode .grid-item.spark {
 }
 
 @media (max-width: 900px) {
-    /* ... nějaký kód ... */
-
-    /* PŘIDEJ SEM TOTO, POKUD TO TAM NENÍ: */
     #intro h1 {
-        font-size: 3.5rem; /* Na mobilu to vrátíme na menší velikost, aby se to vešlo */
+        font-size: 3.5rem;
     }
 }
 
 #intro h2 {
     font-family: 'Cinzel Decorative', cursive;
     
-    /* --- TOTO JE TO KOUZLO --- */
     color: var(--accent); 
-    /* Říkáme: "Použij tu barvu, která je zrovna nastavená v proměnné --accent" */
-    
+
     margin-bottom: 25px;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -379,7 +390,8 @@ nav {
     width: 100%;
     max-width: 1400px;
     
-    min-height: 85vh;
+    min-height: 100vh; 
+    
     margin: 0 auto;
     margin-right: 150px;
     flex-wrap: wrap;
