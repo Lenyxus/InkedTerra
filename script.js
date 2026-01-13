@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // přepínání témat
+    // --- 1. PŘEPÍNÁNÍ TÉMAT (Dark/Light Mode) ---
     const toggleBtn = document.getElementById('theme-toggle-btn');
     const body = document.body;
     const logoImg = document.getElementById('hero-logo');
 
+    // Načtení uloženého tématu
     if(localStorage.getItem('theme') === 'light') {
         body.classList.add('light-mode');
         if(toggleBtn) toggleBtn.textContent = '☀';
@@ -15,12 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleBtn.addEventListener('click', () => {
             const isLight = body.classList.toggle('light-mode');
             toggleBtn.textContent = isLight ? '☀' : '☾';
+            // Změna loga podle režimu
             if(logoImg) logoImg.src = isLight ? 'img/logo-light.png' : 'img/logo-dark.png';
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
     }
 
-    // Carousel galerie
+    // --- 2. CAROUSEL GALERIE (Posouvání šipkami) ---
     const scrollContainer = document.getElementById('gallery-scroll');
     const btnLeft = document.getElementById('btn-left');
     const btnRight = document.getElementById('btn-right');
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Hvězdy pozadí
+    // --- 3. BACKGROUND HVĚZDY (Efekt jisker) ---
     const gridContainer = document.getElementById('grid-container');
 
     if (gridContainer) {
@@ -65,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Vytvoření hvězdy
         function spawnSpark() {
             const r = Math.floor(Math.random() * rows);
             const c = Math.floor(Math.random() * cols);
@@ -80,9 +81,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         createGrid();
-        
-        setInterval(spawnSpark, 150); /*Interval jisker */
-
+        setInterval(spawnSpark, 150); /* Interval jisker */
         window.addEventListener('resize', createGrid);
     }
+
+    // --- 5. SCROLL ANIMACE PRO HERO ODKAZY ---
+    
+    // Najdeme všechny odkazy, které chceme animovat
+    const hiddenElements = document.querySelectorAll('.hover-link-item');
+
+    // Vytvoříme "pozorovatele" (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            console.log(entry); // Pro kontrolu
+            // Pokud je prvek vidět na obrazovce
+            if (entry.isIntersecting) {
+                // Přidáme třídu .show (spustí CSS animaci)
+                entry.target.classList.add('show');
+            } 
+            // Pokud chceš, aby zmizeli když vyjedeš nahoru, odkomentuj else:
+            // else {
+            //    entry.target.classList.remove('show');
+            // }
+        });
+    }, {
+        threshold: 0.1 // Spustí se, když je vidět alespoň 10% prvku
+    });
+
+    // Řekneme pozorovateli, ať sleduje všechny naše odkazy
+    hiddenElements.forEach((el) => observer.observe(el));
 });
