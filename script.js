@@ -98,10 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Přidáme třídu .show (spustí CSS animaci)
                 entry.target.classList.add('show');
             } 
-            // Pokud chceš, aby zmizeli když vyjedeš nahoru, odkomentuj else:
-            // else {
-            //    entry.target.classList.remove('show');
-            // }
+            else {
+                entry.target.classList.remove('show');
+            }
         });
     }, {
         threshold: 0.1 // Spustí se, když je vidět alespoň 10% prvku
@@ -110,3 +109,34 @@ document.addEventListener("DOMContentLoaded", () => {
     // Řekneme pozorovateli, ať sleduje všechny naše odkazy
     hiddenElements.forEach((el) => observer.observe(el));
 });
+
+// --- 6. MULTI BAR PARALLAX EFEKT ---
+    const parallaxSection = document.getElementById('multibar-parallax');
+    const bars = document.querySelectorAll('.bar-inner');
+
+    if (parallaxSection && bars.length > 0) {
+        window.addEventListener('scroll', () => {
+            // Zjistíme, kde se sekce nachází vůči oknu
+            const sectionTop = parallaxSection.getBoundingClientRect().top;
+            const screenHeight = window.innerHeight;
+
+            // Efekt se spustí jen, když je sekce vidět
+            if (sectionTop < screenHeight && sectionTop > -parallaxSection.offsetHeight) {
+                
+                // Vypočítáme posun (čím víc scrolluješ, tím větší číslo)
+                // Dělíme 5ti, aby to nebylo moc rychlé
+                const scrollProgress = (screenHeight - sectionTop) / 5;
+
+                bars.forEach((bar, index) => {
+                    // Sudé pruhy (index 1, 3) jedou dolů, Liché (0, 2, 4) jedou nahoru
+                    // Používáme modulo (%) pro zjištění sudá/lichá
+                    const direction = index % 2 === 0 ? -1 : 1; 
+                    
+                    // Aplikujeme posun
+                    const movement = scrollProgress * direction * 0.5; // 0.5 je rychlost
+                    
+                    bar.style.transform = `translateY(${movement}px)`;
+                });
+            }
+        });
+    }
